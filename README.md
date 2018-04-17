@@ -1,12 +1,18 @@
 # MicTray
-MicTray is a Lightweight application which lets you control the microphone state and volume 
+MicTray is a Lightweight application which lets you control the microphone state and volume from system tray
 
-### Build with Meson 
+### Requirements
+* PulseAudio
+* Gtk
+
+### Control
+* Left-Button click - mute/unmute
+* Middle-Button click - mixer
+* Srcoll - Volume up/down
+
+### Build & Install
 
 	meson build --prefix=/usr
 	cd build
 	ninja
-
-### Install & Run
 	sudo ninja install
-	mictray
