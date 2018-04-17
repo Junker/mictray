@@ -51,9 +51,9 @@ public class MicStatusIcon : StatusIcon
 		menu_mixer.activate.connect(menu_mixer_clicked);
 		context_menu.append(menu_mixer);
 
-	    var menu_settings = new Gtk.MenuItem.with_mnemonic("_Settings");
-	    menu_settings.activate.connect(menu_settings_clicked);
-	    context_menu.append(menu_settings);
+		var menu_settings = new Gtk.MenuItem.with_mnemonic("_Settings");
+		menu_settings.activate.connect(menu_settings_clicked);
+		context_menu.append(menu_settings);
 
 		var menu_about = new Gtk.MenuItem.with_mnemonic(_("_About"));
 		menu_about.activate.connect(menu_about_clicked);
