@@ -34,6 +34,10 @@ public class MicStatusIcon : StatusIcon
 				else
 					pulse.mute();
 			}
+			else if (event.button == 2)
+			{
+				launch_mixer();
+			}
 		});
 
 		this.buildContextMenu();
@@ -77,7 +81,7 @@ public class MicStatusIcon : StatusIcon
 
 	public void menu_mixer_clicked()
 	{
-		Posix.system(config.mixer + " &");
+		launch_mixer();
 	}
 
 	public void menu_settings_clicked()
@@ -106,5 +110,11 @@ public class MicStatusIcon : StatusIcon
 		{
 			this.set_from_icon_name("microphone-sensitivity-high");
 		}
+	}
+
+
+	private void launch_mixer()
+	{
+		Posix.system(config.mixer + " &");
 	}
 }
