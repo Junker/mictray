@@ -29,11 +29,6 @@ public class Pulse : Object
 		}
 	}
 
-	public void start()
-	{
-
-	}
-
 	public void cstate_cb(Context context)
 	{
 		Context.State state = context.get_state();
@@ -49,15 +44,15 @@ public class Pulse : Object
 		if (state == Context.State.READY) {
 			GLib.info("state READY\n");
 
-			context.set_subscribe_callback(this.subscribeCallback);
+			context.set_subscribe_callback(this.subscribe_cb);
 
 			context.subscribe(Context.SubscriptionMask.SOURCE | Context.SubscriptionMask.SERVER);
 
-			this.refreshServerInfo();
+			this.refresh_server_info();
 		}
 	 }
 
-	public HashMap<string,string> getInputList()
+	public HashMap<string,string> get_input_list()
 	{
 		PulseAudio.Operation op = null;
 
@@ -94,7 +89,7 @@ public class Pulse : Object
 		context.set_source_mute_by_name(this.current_source_name, false);
 	}
 
-	public void increaseVolume()
+	public void increase_volume()
 	{
 		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) => 
 		{
@@ -102,18 +97,18 @@ public class Pulse : Object
 
 			CVolume cvolume = info.volume;
 
-			if (cvolume.avg() + getPreparedVolumeIncrement() > PulseAudio.Volume.NORM)
+			if (cvolume.avg() + get_prepared_volume_increment() > PulseAudio.Volume.NORM)
 			{
 				cvolume.inc(PulseAudio.Volume.NORM - cvolume.avg());
 			}
 			else
-				cvolume = cvolume.inc(getPreparedVolumeIncrement());
+				cvolume = cvolume.inc(get_prepared_volume_increment());
 
 			context.set_source_volume_by_name(this.current_source_name, cvolume);
 		});
 	}
 
-	public void decreaseVolume()
+	public void decrease_volume()
 	{
 		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) => 
 		{
@@ -121,19 +116,19 @@ public class Pulse : Object
 
 			CVolume cvolume = info.volume;
 
-			cvolume = cvolume.dec(getPreparedVolumeIncrement());
+			cvolume = cvolume.dec(get_prepared_volume_increment());
 
 			context.set_source_volume_by_name(this.current_source_name, cvolume);
 		});		
 	}
 
-	private void subscribeCallback(Context ctx, Context.SubscriptionEventType eventType, uint32 idx)
+	private void subscribe_cb(Context ctx, Context.SubscriptionEventType eventType, uint32 idx)
 	{
 		switch (eventType & Context.SubscriptionEventType.FACILITY_MASK)
 		{
 			case Context.SubscriptionEventType.SERVER:
 			{
-				this.refreshServerInfo();
+				this.refresh_server_info();
 				break;
 			}
 			case Context.SubscriptionEventType.SOURCE:
@@ -143,7 +138,7 @@ public class Pulse : Object
 					if (eol > 0) return;
 
 					if (info.name == this.current_source_name)
-						this.refreshSourceInfo();
+						this.refresh_source_info();
 				});
 
 				break;
@@ -151,12 +146,12 @@ public class Pulse : Object
 		}
 	}
 
-	private uint32 getPreparedVolumeIncrement()
+	private uint32 get_prepared_volume_increment()
 	{
 		return (uint32)((config.volume_increment * PulseAudio.Volume.NORM) / 100);
 	}
 
-	public void refreshServerInfo()
+	public void refresh_server_info()
 	{
 		this.context.get_server_info((ctx, server_info) => 
 		{
@@ -177,12 +172,12 @@ public class Pulse : Object
 
 			if (changed)
 			{
-				this.refreshSourceInfo();
+				this.refresh_source_info();
 			}
 		});
 	}
 
-	public void refreshSourceInfo()
+	public void refresh_source_info()
 	{
 		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) => 
 		{

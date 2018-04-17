@@ -21,7 +21,6 @@ static int main (string[] args)
 
 	pulse = new Pulse();
 	pulse.change_callback = () => {status_icon.update();};
-	pulse.start();
 	
 	if (config.load())
 	{

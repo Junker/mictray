@@ -46,7 +46,7 @@ public class SettingsWindow : Window
 		btn_cancel.clicked.connect(() => {this.destroy();});;
 
 		var btn_ok = new Button.with_label("Save");
-		btn_ok.clicked.connect(() => {this.saveSettings();});
+		btn_ok.clicked.connect(() => {this.save_settings();});
 
 		hbox6.pack_start(btn_cancel, false, false, 5);
 		hbox6.pack_end(btn_ok, false, false, 5);
@@ -54,18 +54,18 @@ public class SettingsWindow : Window
 
 		this.add(vbox);
 
-		loadSources();
+		load_sources();
 	}
 
-	public void saveSettings()
+	public void save_settings()
 	{
 		pulse.current_source_name = this.input_combo.get_active_id();
 
 		config.source_name = pulse.current_source_name;
 		config.use_default_source = this.input_checkbox.get_active();
 
-		pulse.refreshServerInfo();
-		pulse.refreshSourceInfo();
+		pulse.refresh_server_info();
+		pulse.refresh_source_info();
 
 		config.volume_increment = this.spin_button.get_value_as_int();
 		config.save();
@@ -73,10 +73,10 @@ public class SettingsWindow : Window
 		this.destroy();
 	}
 
-	private void loadSources()
+	private void load_sources()
 	{
 
-		HashMap<string, string> list = pulse.getInputList();
+		HashMap<string, string> list = pulse.get_input_list();
 
 		var i = 0;
 
