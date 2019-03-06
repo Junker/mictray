@@ -10,7 +10,6 @@ extern const string GETTEXT_PACKAGE;
 
 static int main (string[] args) 
 {
-
 	Intl.textdomain(GETTEXT_PACKAGE);
 
 	Gtk.init(ref args);
@@ -22,7 +21,7 @@ static int main (string[] args)
 	pulse = new Pulse();
 	pulse.change_callback = () => {status_icon.update();};
 	
-	if (config.load())
+	if (config.load() && !config.use_default_source)
 	{
 		pulse.current_source_name = config.source_name;
 	}
