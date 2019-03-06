@@ -41,7 +41,8 @@ public class Pulse : Object
 		if (state == Context.State.FAILED) { GLib.info("state FAILED,\n"); }
 		if (state == Context.State.TERMINATED) { GLib.info("state TERMINATED\n"); }
 
-		if (state == Context.State.READY) {
+		if (state == Context.State.READY) 
+		{
 			GLib.info("state READY\n");
 
 			context.set_subscribe_callback(this.subscribe_cb);
@@ -49,6 +50,7 @@ public class Pulse : Object
 			context.subscribe(Context.SubscriptionMask.SOURCE | Context.SubscriptionMask.SERVER);
 
 			this.refresh_server_info();
+			this.refresh_source_info();
 		}
 	 }
 
