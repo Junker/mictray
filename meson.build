@@ -1,5 +1,5 @@
 project('mictray', 'vala', 'c',
-	version : '0.1.0',
+	version : '0.1.3',
 	license : 'GPL3')
 
 gtk_dep = dependency('gtk+-3.0', version : '>=3.22')
