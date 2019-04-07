@@ -72,7 +72,7 @@ public class Pulse : Object
 
 		for (;;) 
 		{
-			if (op.get_state() == PulseAudio.Operation.DONE)
+			if (op.get_state() == PulseAudio.Operation.State.DONE)
 			{
 				return list;
 			}
@@ -157,25 +157,19 @@ public class Pulse : Object
 	{
 		this.context.get_server_info((ctx, server_info) => 
 		{
-			bool changed = false;
-
 			if (this.current_source_name == null)
 			{
 				this.current_source_name = server_info.default_source_name;
-				changed = true;
+				this.refresh_source_info();
 			}
 
 			if (config.use_default_source && this.current_source_name != server_info.default_source_name)
 			{
 				this.current_source_name = server_info.default_source_name;
 				config.source_name = this.current_source_name;
-				changed = true;
-			}
-
-			if (changed)
-			{
 				this.refresh_source_info();
 			}
+
 		});
 	}
 
