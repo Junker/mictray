@@ -8,8 +8,8 @@ addons:
             - valac
             - libgee-0.8-dev
             - libpulse-dev
+            - ninja-build
             - meson
-            - ninja
 
 script:
     - meson builddir
