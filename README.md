@@ -16,3 +16,6 @@ MicTray is a Lightweight application which lets you control the microphone state
 	cd build
 	ninja
 	sudo ninja install
+
+### Install from Arch Linux & Manjaro 
+	yaourt -S mictray
