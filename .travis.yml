@@ -12,6 +12,6 @@ addons:
             - meson
 
 script:
-    - meson builddir
+    - meson setup builddir
     - ninja -C builddir
     - ninja -C builddir test
