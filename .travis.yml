@@ -1,0 +1,15 @@
+language: c
+
+addons:
+    apt:
+        packages:
+            - valac
+            - libgee-0.8-dev
+            - libpulse-dev
+            - meson
+            - ninja
+
+script:
+    - meson builddir
+    - ninja -C builddir
+    - ninja -C builddir test
