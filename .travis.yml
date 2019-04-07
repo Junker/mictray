@@ -4,6 +4,8 @@ dist: xenial
 
 addons:
     apt:
+        sources:
+            - sourceline: 'ppa:jonathonf/meson'
         packages:
             - valac
             - libgee-0.8-dev
