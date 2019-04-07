@@ -2,7 +2,7 @@ project('mictray', 'vala', 'c',
 	version : '0.1.0',
 	license : 'GPL3')
 
-gtk_dep = dependency('gtk+-3.0')
+gtk_dep = dependency('gtk+-3.0', version : '>=3.22')
 gee_dep = dependency('gee-0.8')
 pulse_dep = dependency('libpulse')
 pulse_loop_dep = dependency('libpulse-mainloop-glib')
