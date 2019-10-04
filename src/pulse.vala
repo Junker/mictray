@@ -139,6 +139,8 @@ public class Pulse : Object
 				{
 					if (eol > 0) return;
 
+					if (info == null) return;
+
 					if (info.name == this.current_source_name)
 						this.refresh_source_info();
 				});
