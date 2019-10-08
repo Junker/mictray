@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MicTray
+Comment=Microphone control
+Icon=microphone-sensitivity-medium
+Categories=AudioVideo;Audio;GTK
+Exec=mictray
+StartupNotify=true
+Terminal=false

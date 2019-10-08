@@ -17,6 +17,10 @@ sources = [
 	'src/settings-window.vala'
 ]
 
+install_desktoppath = join_paths(get_option('datadir'), 'applications')
+
+install_data('mictray.desktop', install_dir: install_desktoppath)
+
 executable('mictray', 'src/mictray.vala',
 	sources,
 	dependencies : [gtk_dep, pulse_dep, pulse_loop_dep, gee_dep],
