@@ -21,3 +21,8 @@ MicTray is a Lightweight application which lets you control the microphone state
 
 ### Install from Arch Linux & Manjaro 
 	yaourt -S mictray
+
+### Install from Ubuntu
+	add-apt-repository ppa:mictray/mictray
+	apt-get update
+	apt-get install mictray
