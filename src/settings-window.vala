@@ -5,6 +5,7 @@ public class SettingsWindow : Window
 {
 	private ComboBoxText input_combo;
 	private CheckButton input_checkbox;
+	private CheckButton notify_checkbox;
 	private SpinButton spin_button;
 
 	construct
@@ -40,6 +41,10 @@ public class SettingsWindow : Window
 		hbox3.pack_end(spin_button, false, false, 5);										
 		vbox.pack_start(hbox3, false, false, 0);
 
+		notify_checkbox = new CheckButton.with_label("Show notifications");
+		notify_checkbox.set_active(config.show_notifications);
+		vbox.pack_start(notify_checkbox, false, false, 0);
+
 		var hbox6 = new Box(Gtk.Orientation.HORIZONTAL, 2); 
 		var btn_cancel = new Button.with_label("Cancel");
 
@@ -51,6 +56,7 @@ public class SettingsWindow : Window
 		hbox6.pack_start(btn_cancel, false, false, 5);
 		hbox6.pack_end(btn_ok, false, false, 5);
 		vbox.pack_start(hbox6,false, false, 0);
+
 
 		this.add(vbox);
 
@@ -68,6 +74,10 @@ public class SettingsWindow : Window
 		pulse.refresh_source_info();
 
 		config.volume_increment = this.spin_button.get_value_as_int();
+
+		config.show_notifications = this.notify_checkbox.get_active();
+
+
 		config.save();
 
 		this.destroy();

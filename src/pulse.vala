@@ -5,10 +5,12 @@ using Gee;
 public class Pulse : Object 
 {
 	public string? current_source_name = null;
+	public string? current_source_description = null;
 	public int volume;
 	public bool muted;
 
 	public Callback change_callback;
+	public Callback source_change_callback;
 
 	private PulseAudio.Context context;
 	private PulseAudio.Context.Flags cflags;
@@ -62,7 +64,6 @@ public class Pulse : Object
 
 		op = context.get_source_info_list((ctx, info, eol) => 
 		{
-
 			if (eol > 0) return;
 
 			GLib.info(info.name+"\n");
@@ -171,13 +172,12 @@ public class Pulse : Object
 				config.source_name = this.current_source_name;
 				this.refresh_source_info();
 			}
-
 		});
 	}
 
 	public void refresh_source_info()
 	{
-		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) => 
+		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) =>
 		{
 			if (eol > 0) return;
 
@@ -185,7 +185,15 @@ public class Pulse : Object
 			this.muted = (bool)info.mute;
 
 			this.change_callback();
+
+			string? old_source_description = this.current_source_description;
+			this.current_source_description = info.description;
+
+			if (old_source_description != null && old_source_description != this.current_source_description)
+			{
+				this.source_change_callback();
+			}
+
 		});
 	}
-
 }

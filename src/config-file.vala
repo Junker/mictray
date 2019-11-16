@@ -7,13 +7,13 @@ public class ConfigFile
 	public string source_name;
 	public int volume_increment = 3;
 	public string mixer ="pavucontrol";
+	public bool show_notifications = true;
 
 	public ConfigFile()
 	{
 		this.file = new KeyFile();
 
 		this.filename = GLib.Path.build_filename(GLib.Environment.get_home_dir(), ".config", GETTEXT_PACKAGE, "mictray.conf");
-
 	}
 
 	public bool load()
@@ -26,7 +26,7 @@ public class ConfigFile
 			this.source_name = this.file.get_string("Options", "source_name");
 			this.mixer = this.file.get_string("Options", "mixer");
 			this.volume_increment = this.file.get_integer("Options", "volume_increment");
-
+			this.show_notifications = this.file.get_boolean("Options", "show_notifications");
 		}
 		catch(KeyFileError err)
 		{
@@ -51,6 +51,7 @@ public class ConfigFile
 			this.file.set_string("Options", "source_name", this.source_name);
 			this.file.set_string("Options", "mixer", this.mixer);
 			this.file.set_integer("Options", "volume_increment", this.volume_increment);
+			this.file.set_boolean("Options", "show_notifications", this.show_notifications);
 
 			return this.file.save_to_file(this.filename);
 		}
