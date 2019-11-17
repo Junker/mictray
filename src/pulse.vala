@@ -7,6 +7,7 @@ public class Pulse : Object
 	public string? current_source_name = null;
 	public string? current_source_description = null;
 	public int volume;
+	public int old_volume;
 	public bool muted;
 
 	public Callback change_callback;
@@ -181,6 +182,7 @@ public class Pulse : Object
 		{
 			if (eol > 0) return;
 
+			this.old_volume = this.volume;
 			this.volume = (int)((info.volume.avg() / (float)PulseAudio.Volume.NORM) * 100);
 			this.muted = (bool)info.mute;
 

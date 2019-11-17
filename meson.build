@@ -5,6 +5,7 @@ project('mictray', 'vala', 'c',
 gtk_dep = dependency('gtk+-3.0', version : '>=3.22')
 gee_dep = dependency('gee-0.8')
 pulse_dep = dependency('libpulse')
+notify_dep = dependency('libnotify')
 pulse_loop_dep = dependency('libpulse-mainloop-glib')
 
 
@@ -23,6 +24,6 @@ install_data('mictray.desktop', install_dir: install_desktoppath)
 
 executable('mictray', 'src/mictray.vala',
 	sources,
-	dependencies : [gtk_dep, pulse_dep, pulse_loop_dep, gee_dep],
+	dependencies : [gtk_dep, pulse_dep, pulse_loop_dep, gee_dep,notify_dep],
 	install: true
 )

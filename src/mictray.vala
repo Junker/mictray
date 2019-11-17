@@ -1,11 +1,13 @@
 
 using Gtk;
+using Notify;
 
 static MicStatusIcon status_icon;
 
 static Pulse pulse;
 static ConfigFile config;
 static MicTrayApp app;
+static Notify.Notification vol_notification;
 
 extern const string GETTEXT_PACKAGE;
 
@@ -18,17 +20,44 @@ class MicTrayApp : Gtk.Application
 		config = new ConfigFile();
 
 		pulse = new Pulse();
-		pulse.change_callback = () => {status_icon.update();};
+
+		Notify.init ("MicTray");
+		vol_notification = new Notify.Notification ("Volume: %d%c".printf(pulse.volume, '%'), "", status_icon.icon_name);
+		vol_notification.set_timeout(2000);
+		vol_notification.set_hint("transient", new Variant.boolean(true));
+
+		pulse.change_callback = () =>
+		{
+			status_icon.update();
+
+			if (config.show_notifications && pulse.old_volume != pulse.volume)
+			{
+				try
+				{
+					vol_notification.update("Volume: %d%c".printf(pulse.volume, '%'), "", status_icon.icon_name);
+					vol_notification.set_hint("value", new Variant.int32(pulse.volume));
+					vol_notification.show();
+				}
+				catch (Error e)
+				{
+					error ("Error: %s", e.message);
+				}
+			}
+		};
 
 		pulse.source_change_callback = () =>
 		{
 			if (config.show_notifications)
 			{
-				Notification notification = new Notification("Input source changed");
-				notification.set_icon(new ThemedIcon(status_icon.icon_name));
-				notification.set_body(pulse.current_source_description);
-
-				app.send_notification("source-changed", notification);
+				try
+				{
+					Notify.Notification notification = new Notify.Notification ("Input source changed", pulse.current_source_description, status_icon.icon_name);
+					notification.show();
+				}
+				catch (Error e)
+				{
+					error ("Error: %s", e.message);
+				}
 			}
 		};
 
