@@ -9,6 +9,7 @@ public class Pulse : Object
 	public int volume;
 	public int old_volume;
 	public bool muted;
+	public bool old_muted;
 
 	public Callback change_callback;
 	public Callback source_change_callback;
@@ -184,6 +185,7 @@ public class Pulse : Object
 
 			this.old_volume = this.volume;
 			this.volume = (int)((info.volume.avg() / (float)PulseAudio.Volume.NORM) * 100);
+			this.old_muted = this.muted;
 			this.muted = (bool)info.mute;
 
 			this.change_callback();
