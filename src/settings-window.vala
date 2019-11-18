@@ -23,7 +23,7 @@ public class SettingsWindow : Window
 		});
 
 		input_checkbox.set_active(config.use_default_source);
-		vbox.pack_start(input_checkbox, false, false, 0);
+		vbox.pack_start(input_checkbox, false, false, 5);
 		
 		var hbox1 = new Box(Gtk.Orientation.HORIZONTAL, 2);
 		input_combo = new ComboBoxText();
@@ -31,7 +31,7 @@ public class SettingsWindow : Window
 
 		hbox1.pack_start(new Label("Input:"), false, false, 5);
 		hbox1.pack_end(input_combo, false, false, 5);
-		vbox.pack_start(hbox1, false, false, 0);
+		vbox.pack_start(hbox1, false, false, 5);
 
 		var hbox3 = new Box(Gtk.Orientation.HORIZONTAL, 2);
 		spin_button = new SpinButton.with_range(1, 99, 1);
@@ -39,11 +39,11 @@ public class SettingsWindow : Window
 
 		hbox3.pack_start(new Label("Volume increment"), false, false, 5);
 		hbox3.pack_end(spin_button, false, false, 5);										
-		vbox.pack_start(hbox3, false, false, 0);
+		vbox.pack_start(hbox3, false, false, 5);
 
 		notify_checkbox = new CheckButton.with_label("Show notifications");
 		notify_checkbox.set_active(config.show_notifications);
-		vbox.pack_start(notify_checkbox, false, false, 0);
+		vbox.pack_start(notify_checkbox, false, false, 5);
 
 		var hbox6 = new Box(Gtk.Orientation.HORIZONTAL, 2); 
 		var btn_cancel = new Button.with_label("Cancel");
@@ -55,7 +55,7 @@ public class SettingsWindow : Window
 
 		hbox6.pack_start(btn_cancel, false, false, 5);
 		hbox6.pack_end(btn_ok, false, false, 5);
-		vbox.pack_start(hbox6,false, false, 0);
+		vbox.pack_start(hbox6,false, false, 10);
 
 
 		this.add(vbox);
