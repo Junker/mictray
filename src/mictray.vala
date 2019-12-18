@@ -30,7 +30,7 @@ class MicTrayApp : Gtk.Application
 		{
 			status_icon.update();
 
-			if (config.show_notifications && pulse.old_volume != pulse.volume || pulse.old_muted != pulse.muted)
+			if (config.show_notifications && (pulse.old_volume != pulse.volume || pulse.old_muted != pulse.muted))
 			{
 				try
 				{
