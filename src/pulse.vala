@@ -10,6 +10,7 @@ public class Pulse : Object
 	public int old_volume;
 	public bool muted;
 	public bool old_muted;
+	public bool first_change = true;
 
 	public Callback change_callback;
 	public Callback source_change_callback;
@@ -198,6 +199,7 @@ public class Pulse : Object
 				this.source_change_callback();
 			}
 
+			this.first_change = false;
 		});
 	}
 }

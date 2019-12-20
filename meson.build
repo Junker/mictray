@@ -13,6 +13,7 @@ add_project_arguments('-DGETTEXT_PACKAGE="mictray"', language: 'c')
 
 sources = [
 	'src/pulse.vala',
+	'src/notification.vala',
 	'src/config-file.vala',
 	'src/status-icon.vala',
 	'src/settings-window.vala'
