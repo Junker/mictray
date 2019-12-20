@@ -1,13 +1,9 @@
 language: c
 
-dist: xenial
+dist: bionic
 
 addons:
     apt:
-        sources:
-            - sourceline: 'ppa:jonathonf/meson'
-            - sourceline: 'ppa:jonathonf/gtk3.22'
-            - sourceline: 'ppa:vala-team/ppa'
         packages:
             - valac
             - libgee-0.8-dev
