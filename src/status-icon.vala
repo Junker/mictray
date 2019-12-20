@@ -71,7 +71,8 @@ public class MicStatusIcon : StatusIcon
 	public void menu_about_clicked()
 	{
 		var about = new Gtk.AboutDialog();
-		about.set_version("0.1.0");
+		about.set_logo_icon_name("microphone-sensitivity-high");
+		about.set_version("0.2.1");
 		about.set_program_name("MicTray");
 		about.set_comments("Microphone control application");
 		about.set_copyright("Dmitry Kosenkov");
