@@ -2,7 +2,7 @@ using PulseAudio;
 using Gee;
 
 
-public class Pulse : Object 
+public class Pulse : Object
 {
 	public string? current_source_name = null;
 	public string? current_source_description = null;
@@ -19,7 +19,7 @@ public class Pulse : Object
 	private PulseAudio.Context.Flags cflags;
 	private PulseAudio.GLibMainLoop loop;
 
-	construct 
+	construct
 	{
 		this.loop = new PulseAudio.GLibMainLoop();
 
@@ -27,7 +27,7 @@ public class Pulse : Object
 		this.cflags = Context.Flags.NOFAIL;
 		this.context.set_state_callback(this.cstate_cb);
 
-		if (this.context.connect(null, this.cflags, null) < 0) 
+		if (this.context.connect(null, this.cflags, null) < 0)
 		{
 			print("pa_context_connect() failed: %s\n", PulseAudio.strerror(context.errno()));
 			Process.exit(Posix.EXIT_FAILURE);
@@ -46,7 +46,7 @@ public class Pulse : Object
 		if (state == Context.State.FAILED) { GLib.info("state FAILED,\n"); }
 		if (state == Context.State.TERMINATED) { GLib.info("state TERMINATED\n"); }
 
-		if (state == Context.State.READY) 
+		if (state == Context.State.READY)
 		{
 			GLib.info("state READY\n");
 
@@ -65,7 +65,7 @@ public class Pulse : Object
 
 		var list = new HashMap<string, string>();
 
-		op = context.get_source_info_list((ctx, info, eol) => 
+		op = context.get_source_info_list((ctx, info, eol) =>
 		{
 			if (eol > 0) return;
 
@@ -74,7 +74,7 @@ public class Pulse : Object
 			list.set(info.name, info.description);
 		});
 
-		for (;;) 
+		for (;;)
 		{
 			if (op.get_state() == PulseAudio.Operation.State.DONE)
 			{
@@ -97,7 +97,7 @@ public class Pulse : Object
 
 	public void increase_volume()
 	{
-		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) => 
+		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) =>
 		{
 			if (eol > 0) return;
 
@@ -116,7 +116,7 @@ public class Pulse : Object
 
 	public void decrease_volume()
 	{
-		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) => 
+		context.get_source_info_by_name(this.current_source_name, (ctx, info, eol) =>
 		{
 			if (eol > 0) return;
 
@@ -125,7 +125,7 @@ public class Pulse : Object
 			cvolume = cvolume.dec(get_prepared_volume_increment());
 
 			context.set_source_volume_by_name(this.current_source_name, cvolume);
-		});		
+		});
 	}
 
 	private void subscribe_cb(Context ctx, Context.SubscriptionEventType eventType, uint32 idx)
@@ -139,7 +139,7 @@ public class Pulse : Object
 			}
 			case Context.SubscriptionEventType.SOURCE:
 			{
-				context.get_source_info_by_index(idx, (ctx, info, eol) => 
+				context.get_source_info_by_index(idx, (ctx, info, eol) =>
 				{
 					if (eol > 0) return;
 
@@ -161,7 +161,7 @@ public class Pulse : Object
 
 	public void refresh_server_info()
 	{
-		this.context.get_server_info((ctx, server_info) => 
+		this.context.get_server_info((ctx, server_info) =>
 		{
 			if (this.current_source_name == null)
 			{

@@ -1,19 +1,19 @@
 using Gtk;
 
-public class MicStatusIcon : StatusIcon 
+public class MicStatusIcon : StatusIcon
 {
 	public Gtk.Menu context_menu;
 
-	construct 
+	construct
 	{
 		this.set_from_icon_name("microphone-sensitivity-muted");
 
-		this.popup_menu.connect(() => 
+		this.popup_menu.connect(() =>
 		{
 			this.context_menu.popup_at_pointer();
 		});
 
-		this.scroll_event.connect((event) => 
+		this.scroll_event.connect((event) =>
 		{
 			if (event.direction == Gdk.ScrollDirection.UP)
 			{
@@ -40,10 +40,10 @@ public class MicStatusIcon : StatusIcon
 			}
 		});
 
-		this.buildContextMenu();
+		this.build_context_menu();
 	}
 
-	public void buildContextMenu()
+	public void build_context_menu()
 	{
 		context_menu = new Gtk.Menu();
 

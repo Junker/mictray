@@ -1,7 +1,7 @@
 using Gtk;
 using Gee;
 
-public class SettingsWindow : Window 
+public class SettingsWindow : Window
 {
 	private ComboBoxText input_combo;
 	private CheckButton input_checkbox;
@@ -24,7 +24,7 @@ public class SettingsWindow : Window
 
 		input_checkbox.set_active(config.use_default_source);
 		vbox.pack_start(input_checkbox, false, false, 5);
-		
+
 		var hbox1 = new Box(Gtk.Orientation.HORIZONTAL, 2);
 		input_combo = new ComboBoxText();
 		input_combo.set_state_flags(input_checkbox.get_active() ? StateFlags.INSENSITIVE : StateFlags.NORMAL, true);
@@ -38,14 +38,14 @@ public class SettingsWindow : Window
 		spin_button.set_value(config.volume_increment);
 
 		hbox3.pack_start(new Label("Volume increment"), false, false, 5);
-		hbox3.pack_end(spin_button, false, false, 5);										
+		hbox3.pack_end(spin_button, false, false, 5);
 		vbox.pack_start(hbox3, false, false, 5);
 
 		notify_checkbox = new CheckButton.with_label("Show notifications");
 		notify_checkbox.set_active(config.show_notifications);
 		vbox.pack_start(notify_checkbox, false, false, 5);
 
-		var hbox6 = new Box(Gtk.Orientation.HORIZONTAL, 2); 
+		var hbox6 = new Box(Gtk.Orientation.HORIZONTAL, 2);
 		var btn_cancel = new Button.with_label("Cancel");
 
 		btn_cancel.clicked.connect(() => {this.destroy();});;
@@ -90,7 +90,7 @@ public class SettingsWindow : Window
 
 		var i = 0;
 
-		foreach (var entry in list.entries) 
+		foreach (var entry in list.entries)
 		{
 			input_combo.append(entry.key, entry.value);
 
