@@ -184,6 +184,14 @@ public class Pulse : Object
 		{
 			if (eol > 0) return;
 
+			if (eol < 0 || info == null)
+			{
+				this.current_source_name = null;
+				this.refresh_server_info();
+
+				return;
+			}
+
 			this.old_volume = this.volume;
 			this.volume = (int)((info.volume.avg() / (float)PulseAudio.Volume.NORM) * 100);
 			this.old_muted = this.muted;
@@ -201,5 +209,6 @@ public class Pulse : Object
 
 			this.first_change = false;
 		});
+
 	}
 }
