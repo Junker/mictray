@@ -4,6 +4,7 @@ using Gee;
 public class SettingsWindow : Window
 {
 	private ComboBoxText input_combo;
+	private Entry input_mixer;
 	private CheckButton input_checkbox;
 	private CheckButton notify_checkbox;
 	private SpinButton spin_button;
@@ -33,12 +34,19 @@ public class SettingsWindow : Window
 		hbox1.pack_end(input_combo, false, false, 5);
 		vbox.pack_start(hbox1, false, false, 5);
 
+		var hbox2 = new Box(Gtk.Orientation.HORIZONTAL, 2);
+		input_mixer = new Entry();
+		input_mixer.set_text(config.mixer);
+		hbox2.pack_start(new Label("Mixer:"), false, false, 5);
+		hbox2.pack_end(input_mixer, true, true, 5);
+		vbox.pack_start(hbox2, false, false, 5);
+
 		var hbox3 = new Box(Gtk.Orientation.HORIZONTAL, 2);
 		spin_button = new SpinButton.with_range(1, 99, 1);
 		spin_button.set_value(config.volume_increment);
 
 		hbox3.pack_start(new Label("Volume increment"), false, false, 5);
-		hbox3.pack_end(spin_button, false, false, 5);
+		hbox3.pack_end(spin_button, true, true, 5);
 		vbox.pack_start(hbox3, false, false, 5);
 
 		notify_checkbox = new CheckButton.with_label("Show notifications");
@@ -77,6 +85,7 @@ public class SettingsWindow : Window
 
 		config.show_notifications = this.notify_checkbox.get_active();
 
+		config.mixer = this.input_mixer.get_text();
 
 		config.save();
 

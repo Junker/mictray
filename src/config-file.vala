@@ -6,7 +6,7 @@ public class ConfigFile
 	public bool use_default_source = true;
 	public string source_name;
 	public int volume_increment = 3;
-	public string mixer ="pavucontrol";
+	public string mixer = "pavucontrol";
 	public bool show_notifications = true;
 
 	public ConfigFile()
