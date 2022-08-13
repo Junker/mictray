@@ -8,6 +8,7 @@ public class ConfigFile
 	public int volume_increment = 3;
 	public string mixer = "pavucontrol";
 	public bool show_notifications = true;
+	public string hotkey = "XF86AudioMicMute";
 
 	public ConfigFile()
 	{
@@ -27,6 +28,7 @@ public class ConfigFile
 			this.mixer = this.file.get_string("Options", "mixer");
 			this.volume_increment = this.file.get_integer("Options", "volume_increment");
 			this.show_notifications = this.file.get_boolean("Options", "show_notifications");
+			this.hotkey = this.file.get_string("Options", "hotkey");
 		}
 		catch(KeyFileError err)
 		{
@@ -52,6 +54,7 @@ public class ConfigFile
 			this.file.set_string("Options", "mixer", this.mixer);
 			this.file.set_integer("Options", "volume_increment", this.volume_increment);
 			this.file.set_boolean("Options", "show_notifications", this.show_notifications);
+			this.file.set_string("Options", "hotkey", this.hotkey);
 
 			return this.file.save_to_file(this.filename);
 		}

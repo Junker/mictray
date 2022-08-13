@@ -8,6 +8,7 @@ public class SettingsWindow : Window
 	private CheckButton input_checkbox;
 	private CheckButton notify_checkbox;
 	private SpinButton spin_button;
+	private Entry hotkey;
 
 	construct
 	{
@@ -53,6 +54,13 @@ public class SettingsWindow : Window
 		notify_checkbox.set_active(config.show_notifications);
 		vbox.pack_start(notify_checkbox, false, false, 5);
 
+		var hbox4 = new Box(Gtk.Orientation.HORIZONTAL, 2);
+		hotkey = new Entry();
+		hotkey.set_text(config.hotkey);
+		hbox4.pack_start(new Label("Hotkey:"), false, false, 5);
+		hbox4.pack_end(hotkey, true, true, 5);
+		vbox.pack_start(hbox4, false, false, 5);
+
 		var hbox6 = new Box(Gtk.Orientation.HORIZONTAL, 2);
 		var btn_cancel = new Button.with_label("Cancel");
 
@@ -86,6 +94,8 @@ public class SettingsWindow : Window
 		config.show_notifications = this.notify_checkbox.get_active();
 
 		config.mixer = this.input_mixer.get_text();
+
+		config.hotkey = this.hotkey.get_text();
 
 		config.save();
 

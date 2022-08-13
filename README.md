@@ -8,12 +8,15 @@ MicTray is a Lightweight application which lets you control the microphone state
 
 * PulseAudio
 * Gtk
+* libnotify
+* libkeybinder
 
 ## Control
 
 * Left-Button click - mute/unmute
 * Middle-Button click - mixer
 * Srcoll - Volume up/down
+* Hotkey (Default: XF86AudioMicMute) - mute/unmute
 
 ## Build & Install
 

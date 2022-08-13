@@ -8,6 +8,9 @@ pulse_dep = dependency('libpulse')
 notify_dep = dependency('libnotify')
 pulse_loop_dep = dependency('libpulse-mainloop-glib')
 
+keybinder_c_dep = meson.get_compiler('c').find_library('keybinder-3.0')
+vapi_dir = meson.current_source_dir() / 'vapi'
+keybinder_vala_dep = meson.get_compiler('vala').find_library('keybinder', dirs: vapi_dir)
 
 add_project_arguments('-DGETTEXT_PACKAGE="mictray"', language: 'c')
 
@@ -26,6 +29,13 @@ install_data('mictray.desktop', install_dir: install_desktoppath)
 
 executable('mictray', 'src/mictray.vala',
 	sources,
-	dependencies : [gtk_dep, pulse_dep, pulse_loop_dep, gee_dep,notify_dep],
+	dependencies : [
+		gtk_dep,
+		pulse_dep,
+		pulse_loop_dep,
+		gee_dep,notify_dep,
+		keybinder_c_dep,
+		keybinder_vala_dep,
+	],
 	install: true
 )

@@ -44,6 +44,9 @@ class MicTrayApp : Gtk.Application
 
 		Bus.own_name(BusType.SESSION, "app.junker.mictray", BusNameOwnerFlags.ALLOW_REPLACEMENT, on_dbus_aquired);
 
+		Keybinder.init();
+		Keybinder.bind(config.hotkey, test, null);
+
 		Gtk.main();
 	}
 
@@ -66,4 +69,12 @@ static int main (string[] args)
 	app = new MicTrayApp();
 
 	return app.run(args);
+}
+
+private static void test(string keystring, void *udata)
+{
+	if (pulse.muted)
+		pulse.unmute();
+	else
+		pulse.mute();
 }
