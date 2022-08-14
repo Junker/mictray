@@ -55,10 +55,6 @@ public class ConfigFile
 
 			return this.file.save_to_file(this.filename);
 		}
-		catch(KeyFileError err)
-		{
-			return false;
-		}
 		catch(FileError err)
 		{
 			return false;
