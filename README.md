@@ -38,7 +38,7 @@ apt-get install mictray
 
 ## DBUS
 
-**Path**: /app/junker/mictray
+**Path**: /app/junker/mictray \
 **Interface**: app.junker.mictray
 
 ### DBUS methods
