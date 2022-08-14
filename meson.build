@@ -16,7 +16,8 @@ sources = [
 	'src/notification.vala',
 	'src/config-file.vala',
 	'src/status-icon.vala',
-	'src/settings-window.vala'
+	'src/settings-window.vala',
+	'src/dbus-server.vala'
 ]
 
 install_desktoppath = join_paths(get_option('datadir'), 'applications')

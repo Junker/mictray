@@ -29,10 +29,7 @@ public class MicStatusIcon : StatusIcon
 		{
 			if (event.button == 1)
 			{
-				if (pulse.muted)
-					pulse.unmute();
-				else
-					pulse.mute();
+				pulse.toggle_mute();
 			}
 			else if (event.button == 2)
 			{
@@ -72,7 +69,7 @@ public class MicStatusIcon : StatusIcon
 	{
 		var about = new Gtk.AboutDialog();
 		about.set_logo_icon_name("microphone-sensitivity-high");
-		about.set_version("0.2.5");
+		about.set_version("0.3.0");
 		about.set_program_name("MicTray");
 		about.set_comments("Microphone control application");
 		about.set_copyright("Dmitry Kosenkov");

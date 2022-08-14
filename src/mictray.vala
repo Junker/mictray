@@ -42,7 +42,17 @@ class MicTrayApp : Gtk.Application
 			pulse.current_source_name = config.source_name;
 		}
 
+		Bus.own_name(BusType.SESSION, "app.junker.mictray", BusNameOwnerFlags.ALLOW_REPLACEMENT, on_dbus_aquired);
+
 		Gtk.main();
+	}
+
+	private void on_dbus_aquired(DBusConnection conn) {
+		try {
+			conn.register_object("/app/junker/mictray", new DbusServer());
+		} catch (IOError e) {
+			stderr.printf("Could not register DBUS service\n");
+		}
 	}
 
 	public MicTrayApp()
@@ -51,7 +61,7 @@ class MicTrayApp : Gtk.Application
 	}
 }
 
-static int main (string[] args) 
+static int main (string[] args)
 {
 	app = new MicTrayApp();
 

@@ -1,7 +1,6 @@
 using PulseAudio;
 using Gee;
 
-
 public class Pulse : Object
 {
 	public string? current_source_name = null;
@@ -93,6 +92,14 @@ public class Pulse : Object
 	public void unmute()
 	{
 		context.set_source_mute_by_name(this.current_source_name, false);
+	}
+
+	public void toggle_mute()
+	{
+			if (this.muted)
+				this.unmute();
+			else
+				this.mute();
 	}
 
 	public void increase_volume()
